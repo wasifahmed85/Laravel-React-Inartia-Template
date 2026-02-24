@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { UserInfo } from '@/components/user-info';
 import { UserMenuContent } from '@/components/user-menu-content';
-import { dashboard } from '@/routes';
 import { type SharedData } from '@/types';
 
 interface UserHeaderProps {
@@ -23,7 +22,7 @@ export function UserHeader({ showProfileMenu = true }: UserHeaderProps) {
     return (
         <header className='bg-primary-50 shadow z-50 '>
             <div className='container mx-auto flex items-center justify-between py-4 px-4 text-primary-500'>
-                <Link href="/" className="flex items-center gap-3">
+                <Link href="#" className="flex items-center gap-3">
                     <svg className="h-12 w-12" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="50" cy="25" r="12" stroke="currentColor" strokeWidth="3" fill="none" />
                         <path d="M15 40 Q50 20, 85 40" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" />

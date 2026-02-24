@@ -20,9 +20,7 @@ class UserSelectionController extends Controller
         }
 
         // Get all users
-        $users = User::select('id', 'first_name', 'last_name', 'email')
-            ->orderBy('first_name')
-            ->orderBy('last_name')
+        $users = User::select('name', 'email')
             ->get()
             ->map(function ($user) {
                 return [
@@ -37,58 +35,5 @@ class UserSelectionController extends Controller
         ]);
     }
 
-    /**
-     * Get availability data for a specific user (admin only)
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getUserAvailability(Request $request)
-    {
-        // Validate request
-        $validated = $request->validate([
-            'user_id' => ['required', 'exists:users,id'],
-            'year' => ['required', 'integer', 'between:2020,2030'],
-            'month' => ['required', 'integer', 'between:1,12'],
-        ]);
-
-        // Check if user is admin
-        if (! $request->user()->is_admin) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        // Get the user
-        $targetUser = User::find($validated['user_id']);
-        if (! $targetUser) {
-            return response()->json(['error' => 'User not found'], 404);
-        }
-
-        // Get availability data from the service
-        $availabilityService = app(\App\Services\AvailabilityService::class);
-
-        $availabilities = $availabilityService->getAvailabilitiesForMonth(
-            $targetUser->id,
-            $validated['year'],
-            $validated['month']
-        );
-
-        $requirements = $availabilityService->checkRequirements(
-            $targetUser->id,
-            $validated['year'],
-            $validated['month']
-        );
-
-        // Add statistics for this user
-        $statistics = $availabilityService->getUserStatistics(
-            $targetUser->id,
-            $validated['year'],
-            $validated['month']
-        );
-
-        return response()->json([
-            'availabilities' => $availabilities,
-            'requirements' => $requirements,
-            'statistics' => $statistics,
-            'userName' => $targetUser->name,
-        ]);
-    }
+   
 }

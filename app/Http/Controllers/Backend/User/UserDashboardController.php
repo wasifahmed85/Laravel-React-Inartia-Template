@@ -10,7 +10,7 @@ use Inertia\Response;
 
 class UserDashboardController extends Controller
 {
-    public function index(Request $request): RedirectResponse|Response
+    public function index(Request $request): Response|RedirectResponse
     {
         $user = $request->user();
 
@@ -18,42 +18,6 @@ class UserDashboardController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        if (! $user->has_completed_onboarding) {
-            return $this->form($request);
-        }
-
-        return $this->dashboard($request);
-    }
-
-    public function form(Request $request): Response
-    {
-        return Inertia::render('backend/User/UserForm', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    public function dashboard(Request $request): Response
-    {
-        return Inertia::render('backend/User/UserDashboard', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    public function lpaCreate(Request $request): Response
-    {
-        return Inertia::render('backend/User/LpaCreate', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    public function complete(Request $request): RedirectResponse
-    {
-        $user = $request->user();
-
-        if (! $user->has_completed_onboarding) {
-            $user->forceFill(['has_completed_onboarding' => true])->save();
-        }
-
-        return redirect()->route('dashboard.user');
+        return Inertia::render('backend/User/UserDashboard');
     }
 }

@@ -5,7 +5,7 @@ import AppLogo from '@/components/app-logo';
 const StepsHeader: React.FC = () => (
     <div className="bg-primary-500 text-primary-900">
         <div className="container mx-auto flex flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:py-5">
-            <Link href="/" className="flex items-center gap-3">
+            <Link href="#" className="flex items-center gap-3">
                 <AppLogo className="h-18" />
             </Link>
 

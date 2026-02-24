@@ -31,14 +31,14 @@ export default function AuthLayout({
     const highlights = [
         {
             title: 'When I Work sync',
-            description: 'Shift approvals, availability blocks, and payroll roles stay mirrored in real time.',
+            description: 'Shift approvals, coverage rules, and payroll roles stay mirrored in real time.',
         },
         {
             title: 'Coverage intelligence',
             description: 'Cross-location dashboards surface open needs before they become overtime emergencies.',
         },
         {
-            title: 'Availability autopilot',
+            title: 'Scheduling autopilot',
             description: 'Managers publish templates; teams confirm on mobile and Horizon handles the API sync.',
         },
     ];

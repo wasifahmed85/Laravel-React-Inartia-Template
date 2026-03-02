@@ -27,7 +27,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        $user = $request->user();
+        $user = $request->user('web');
+        $admin = $request->user('admin');
 
         return [
             ...parent::share($request),
@@ -46,11 +47,15 @@ class HandleInertiaRequests extends Middleware
                         'name' => $this->displayName($user),
                         'role' => $user->role?->value,
                         'role_label' => $user->role_label,
-                        'is_admin' => $user->isAdmin(),
                         'can_manage_users' => $user->canManageUsers(),
                         'avatar_url' => $user->avatar_url,
                     ]
                 ) : null,
+                'admin' => $admin ? [
+                    'id' => $admin->id,
+                    'name' => $admin->name,
+                    'email' => $admin->email,
+                ] : null,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'features' => [

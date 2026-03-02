@@ -3,6 +3,7 @@ import { LucideIcon } from 'lucide-react';
 
 export interface Auth {
     user: User;
+    admin?: AdminUser;
     permissions?: string[];
 }
 
@@ -57,7 +58,6 @@ export interface User {
     name: string;
     email: string;
     avatar?: string;
-    is_admin?: boolean;
     email_verified_at: string | null;
     two_factor_enabled?: boolean;
     permissions?: string[];
@@ -74,6 +74,12 @@ export interface User {
     can_manage_users?: boolean;
     avatar_url?: string;
     [key: string]: unknown;
+}
+
+export interface AdminUser {
+    id: number;
+    name: string;
+    email: string;
 }
 
 export interface NavItemProps {

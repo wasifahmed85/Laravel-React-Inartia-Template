@@ -24,7 +24,6 @@ class User extends Authenticatable
         'email',
         'avatar',
         'password',
-        'has_completed_onboarding',
         'created_at',
         'updated_at',
     ];
